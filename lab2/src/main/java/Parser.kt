@@ -19,7 +19,7 @@ class Parser(line: String) {
     private fun C() = Tree("C", listOf(K(), `C'`()))
 
     private fun `C'`(): Tree = when (lex.curToken.type) {
-        LPAREN, LETTER -> Tree("C'", listOf(C()))
+        LPAREN, LETTER -> Tree("C'", listOf(K(), `C'`()))
         else -> Tree("Ɛ")
     }
 
