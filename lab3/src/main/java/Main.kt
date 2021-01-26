@@ -7,6 +7,7 @@ import java.nio.file.Files
 import java.nio.file.Path
 import java.util.stream.Collectors
 
+/* https://habr.com/ru/post/341138/ */
 object Main {
     @JvmStatic
     fun main(args: Array<String>) {

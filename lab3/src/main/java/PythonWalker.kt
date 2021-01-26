@@ -2,7 +2,7 @@ import antlr.PythonParser
 import antlr.PythonBaseListener
 import java.util.*
 
-/* https://habr.com/ru/post/341138/ */
+/* https://habr.com/ru/post/346038/ */
 class PythonWalker(parser: PythonParser) : PythonBaseListener() {
     val programC: String
     private var balanceTabs = 0
