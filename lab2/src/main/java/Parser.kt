@@ -28,7 +28,7 @@ class Parser(line: String) {
     private fun `K'`(): Tree = when (lex.curToken.type) {
         KLEENE -> {
             lex.nextToken()
-            Tree("K'", listOf(Tree("*"), `K'`()))
+            Tree("K'", listOf(Tree("*")))
         }
         else -> Tree("Ɛ")
     }

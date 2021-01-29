@@ -16,6 +16,14 @@ class Tests {
     )
 
     @Test
+    fun `Test modif (Several Kleene are forbidden in a row)`() {
+        val test = "(a*)*"
+        println(impl(test))
+        printResult("results", "test_modif_(Several_Kleene_are_forbidden_in_a_row)", test)
+        testException("a***")
+    }
+
+    @Test
     fun `Test from the condition`() {
         val test = "((abc*b|a)*ab(aa|b*)b)*"
         printResult("results", "test_from_the_condition", test)
