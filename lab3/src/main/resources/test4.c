@@ -8,12 +8,11 @@ signed main(void) {
 	if (a > b) {
 		b = b + 1;
 		c = a * b;
-	}
-	if (a > b + 1) {
-		b = b + 1;
-	}
-	if (c * b > a + (b + c)) {
+	} else if (c * b > a + (b + c)) {
 		printf("%d\n", (a));
+		while (a > b + 1) {
+			b = b + 1;
+		}
 	}
 	return 0;
 }

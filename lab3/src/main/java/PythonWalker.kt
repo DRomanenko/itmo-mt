@@ -77,22 +77,43 @@ class PythonWalker(parser: PythonParser) : PythonBaseListener() {
         when {
             ctx.IF() != null -> {
                 main.append("if (")
-                enterCond(ctx.cond())
+                enterCond(ctx.cond(0))
                 main.appendLine(") {")
                 balanceTabs++
                 enterStructures(ctx.structures(0))
                 balanceTabs--
                 main.append("\t".repeat(balanceTabs))
                 main.append("}")
+
+                (1 until ctx.cond().size).forEach {
+                    main.append(" else if (")
+                    enterCond(ctx.cond(it))
+                    main.appendLine(") {")
+                    balanceTabs++
+                    enterStructures(ctx.structures(it))
+                    balanceTabs--
+                    main.append("\t".repeat(balanceTabs))
+                    main.append("}")
+                }
                 if (ctx.ELSE() != null) {
                     main.appendLine(" else {")
                     balanceTabs++
-                    enterStructures(ctx.structures(1))
+                    enterStructures(ctx.structures(ctx.cond().size))
                     balanceTabs--
                     main.append("\t".repeat(balanceTabs))
                     main.append("}")
                 }
                 main.appendLine()
+            }
+            ctx.WHILE() != null -> {
+                main.append("while (")
+                enterCond(ctx.cond(0))
+                main.appendLine(") {")
+                balanceTabs++
+                ctx.structures().forEach { enterStructures(it) }
+                balanceTabs--
+                main.append("\t".repeat(balanceTabs))
+                main.appendLine("}")
             }
         }
     }

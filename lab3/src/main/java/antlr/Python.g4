@@ -23,7 +23,8 @@ assign: tabs
       | OUTPUT expr)
       ;
 
-control: tabs IF cond COLON LINESEPARATOR structures (tabs ELSE COLON LINESEPARATOR structures)?
+control: tabs IF cond COLON LINESEPARATOR structures (tabs ELIF cond COLON LINESEPARATOR structures)* (tabs ELSE COLON LINESEPARATOR structures)?
+       | tabs WHILE cond COLON LINESEPARATOR structures
        ;
 
 expr: LPAREN expr RPAREN
@@ -66,6 +67,8 @@ tabs: TAB*;
 /* Python control structures */
 IF              : 'if';
 ELSE            : 'else';
+ELIF            : 'elif';
+WHILE           : 'while';
 
 /* Python (in/out)put */
 INPUT           : 'int(input())';
